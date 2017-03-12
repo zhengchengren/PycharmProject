@@ -1,0 +1,63 @@
+import easygui as g
+#新建用户
+def create():
+    name=g.enterbox(msg='请输入用户名')
+    while 1:
+        global user
+        if name in user:
+            name=g.enterbox('此用户已经存在，请重新输入')
+        else:
+            break
+    key=g.passwordbox('请输入密码')
+    user[name]=key
+    g.msgbox('注册成功')
+    return
+#登入
+def log_in():
+    name=g.enterbox('请输入用户名')
+    while 1:
+        if user.get(name):
+            break
+        elif name=='':
+            break
+        else:
+            name=g.enterbox('您输入的用户不存在，请重新输入')
+    if name=='':
+        return
+
+    key=g.passwordbox('请输入密码')
+    while 1:
+        if user[name]==key:
+            g.msgbox('欢迎进入ooxx系统，请点击ok返回主菜单')
+            break
+        elif key=='':
+            break
+        else:
+            key=g.enterbox('您输入的用户密码不正确，请重新输入')
+    return
+user={}
+while 1:
+    command=g.buttonbox('请选择',choices=('新建用户','登入','退出程序'))
+    if command=='新建用户':
+        create()
+    elif command=='登入':
+        log_in()
+    elif command=='退出程序':
+        break
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
